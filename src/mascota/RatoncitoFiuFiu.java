@@ -1,20 +1,45 @@
 package mascota;
 
 public class RatoncitoFiuFiu {
-    //
-    // La clase mascota.RatoncitoFiuFiu aun no tiene ningun atributo
-    //
+    private String nombre;
+    private int edad;
+    private int peso;
+    private byte hambre;
+    private byte guarro;
 
-    public RatoncitoFiuFiu(String nombre, int i, int i1, int i2, int i3, int i4) {
-        // Un objeto mascota.RatoncitoFiuFiu debería informar cuando nace...
+    private byte salud;
+    private byte energia;
+
+
+
+    public RatoncitoFiuFiu(String nombre, int peso, byte hambre, byte guarro, byte salud, byte energia) {
+        this.nombre = nombre;
+        this.peso = peso;
+        this.hambre = hambre;
+        this.guarro = guarro;
+        this.salud = salud;
+        this.energia = energia;
+        this.edad = 0;
+
     }
+
+
 
 
     public String estadisticas() {
-        return null;
+        StringBuilder sb = new StringBuilder("RatoncitoFiuFiu");
+
+        sb.append("peso: ").append(this.peso);
+        sb.append("\nhambre: ").append(this.hambre);
+        sb.append("\nguarro: ").append(this.guarro);
+        sb.append("\nsalud: ").append(this.salud);
+        sb.append("\nenergia: ").append(this.energia);
+
+        return sb.toString();
     }
 
-    public void limpiar(int i) {
+    public void limpiar(float esfuerzoHigienico) {
+        this.guarro -= esfuerzoHigienico;
     }
 
     public int queTramoEdad() {
@@ -38,16 +63,18 @@ public class RatoncitoFiuFiu {
     }
 
     public void envejecer(int i) {
+
     }
 
     public boolean tienesQuejas() {
         return false;
     }
 
-    public void alimentar(int b) {
-
+    public void alimentar(float cantidadAlimento) {
+        this.hambre -= cantidadAlimento;
     }
 
-    public void curar(int i) {
+    public void curar(float cantidadMedicina) {
+        this.salud += cantidadMedicina;
     }
 }

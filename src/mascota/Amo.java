@@ -1,2 +1,5 @@
-package mascota;public class Amo {
+package mascota;
+
+public class Amo {
+
 }
