@@ -67,7 +67,7 @@ public class RatoncitoFiuFiu {
     }
 
     public boolean tienesHambre(){
-        return this.hambre >7;
+        return this.hambre >=7;
     }
 
     public void envejecer(int segundos) {
@@ -110,9 +110,29 @@ public class RatoncitoFiuFiu {
 
     public void alimentar(float cantidadAlimento) {
         this.hambre -= cantidadAlimento;
+        ganarPeso(cantidadAlimento);
+        aumentarEnergia(cantidadAlimento);
     }
 
     public void curar(float cantidadMedicina) {
         this.salud += cantidadMedicina;
+        aumentarSalud(cantidadMedicina);
+        aumentarEnergia(cantidadMedicina);
     }
+
+    private void ganarPeso(float cantidad){
+        this.peso += cantidad;
+
+    }
+    private void aumentarEnergia(float cantidad){
+        this.energia += cantidad;
+
+    }
+
+    private void aumentarSalud(float cantidad){
+        this.salud += cantidad;
+
+    }
+
+
 }
