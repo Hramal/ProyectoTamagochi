@@ -12,6 +12,13 @@ public class RatoncitoFiuFiu {
 
     private int vivido;
 
+    private final int INFANCIA = 0;
+
+    private final int ADULTO = 1;
+    private final int VEJEZ = 2;
+
+    private int sueno = this.energia;
+
 
     public RatoncitoFiuFiu(String nombre, int peso, byte hambre, byte guarro, byte salud, byte energia) {
         this.nombre = nombre;
@@ -42,13 +49,28 @@ public class RatoncitoFiuFiu {
     }
 
     public int queTramoEdad() {
-        return 0;
+        if (edad <= 2500) {
+            return INFANCIA;
+        } else if (edad < 8000) {
+            return ADULTO;
+        } else {
+            return VEJEZ;
+        }
     }
 
     public boolean estasDormido() {
+        if (energia <= 50){
+            return true;
+        }
+        if (energia >= 75){
+            return false;
+        }
+        if (sueno < energia){
+            return true;
+        }
         return false;
     }
-    public boolean estasFeliz(){
+    public boolean estasFeliz() {
         return (this.salud > 80 && this.hambre < 3 && this.guarro < 25);
     }
 
@@ -66,8 +88,8 @@ public class RatoncitoFiuFiu {
 
     }
 
-    public boolean tienesHambre(){
-        return this.hambre >=7;
+    public boolean tienesHambre() {
+        return this.hambre >= 7;
     }
 
     public void envejecer(int segundos) {
@@ -105,7 +127,8 @@ public class RatoncitoFiuFiu {
     }
 
     public boolean tienesQuejas() {
-        return false;
+        return (tienesHambre() || estasSucio() || estasEnfermo());
+
     }
 
     public void alimentar(float cantidadAlimento) {
@@ -120,16 +143,17 @@ public class RatoncitoFiuFiu {
         aumentarEnergia(cantidadMedicina);
     }
 
-    private void ganarPeso(float cantidad){
+    private void ganarPeso(float cantidad) {
         this.peso += cantidad;
 
     }
-    private void aumentarEnergia(float cantidad){
+
+    private void aumentarEnergia(float cantidad) {
         this.energia += cantidad;
 
     }
 
-    private void aumentarSalud(float cantidad){
+    private void aumentarSalud(float cantidad) {
         this.salud += cantidad;
 
     }
