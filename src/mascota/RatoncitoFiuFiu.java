@@ -17,6 +17,10 @@ public class RatoncitoFiuFiu {
     private final int ADULTO = 1;
     private final int VEJEZ = 2;
 
+    private final int LIMITEEDAD = 10000;
+
+    private boolean estaRoncando;
+
 
     private boolean comeDemasiado;
 
@@ -29,7 +33,7 @@ public class RatoncitoFiuFiu {
         this.salud = salud;
         this.energia = energia;
         this.edad = 0;
-
+        this.estaRoncando = false;
     }
 
     public String estadisticas() {
@@ -62,23 +66,30 @@ public class RatoncitoFiuFiu {
     }
 
     public boolean estasDormido() {
-        return (energia <= 35);
+        if (energia <= 35) {
+            estaRoncando = true;
+        } else if (energia > 65) {
+            estaRoncando = false;
+
+        }
+        return estaRoncando;
     }
 
     public boolean estasFeliz() {
-        return (this.salud > 80 && this.hambre < 3 && this.guarro < 25);
+        return (!estasSucio() && !tienesHambre());
     }
 
     public boolean estasEnfermo() {
-        return (this.salud <= 25 || comeDemasiado);
+        return (this.salud <= 25);
     }
 
     public boolean estasSucio() {
         return this.guarro >= 75;
+
     }
 
     public boolean estasMuerto() {
-        return this.salud <= 0;
+        return (this.salud <= 0 || edad > LIMITEEDAD);
 
     }
 
@@ -89,7 +100,7 @@ public class RatoncitoFiuFiu {
     public void envejecer(int segundos) {
         this.edad += segundos;
         vivido += segundos;
-        if (vivido > 15) {
+        if (vivido > 5) {
             if (this.hambre >= 100) {
                 tienesHambre();
                 estasEnfermo();
@@ -99,24 +110,32 @@ public class RatoncitoFiuFiu {
                 this.hambre++;
             }
             if (this.guarro >= 100) {
-                estasSucio();
                 this.guarro = 100;
             } else {
                 this.guarro += 10;
             }
             if (this.salud <= 0) {
-                estasMuerto();
+
                 this.salud = 0;
-            } else if (this.salud <= 30) {
-                estasEnfermo();
+            } else if (this.salud <= 25) {
+
+                this.salud -= 5;
             } else {
                 this.salud -= 5;
             }
             if (this.energia <= 0) {
-                estasDormido();
+
                 this.energia = 0;
             } else {
                 this.energia -= 5;
+            }
+            if (energia <= 35) {
+                estaRoncando = true;
+            } else if (energia > 65) {
+                estaRoncando = false;
+            }
+            if (estaRoncando) {
+                aumentarEnergia(5);
             }
             vivido = 0;
         }
@@ -158,6 +177,12 @@ public class RatoncitoFiuFiu {
         this.energia += cantidad;
         if (this.energia >= 100) {
             this.energia = 100;
+        }
+        if (energia <= 35) {
+            estaRoncando = true;
+        } else if (energia > 65) {
+            estaRoncando = false;
+
         }
 
     }

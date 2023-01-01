@@ -66,7 +66,7 @@ public class DuenoIGU extends JFrame {
                 ruta1 = "";
                 ruta2 = "";
 
-                if (!mascota.tienesQuejas()) {
+                if (!mascota.tienesQuejas()|| muerto) {
                     if (despiertoEnfermoSucio) {
                         ruta1 = rutaImagenes + "/despierto-enfermo-sucio-" + tramoEdad.toString() + "-00.gif";
                         ruta2 = rutaImagenes + "/despierto-enfermo-sucio-" + tramoEdad.toString() + "-01.gif";
@@ -91,12 +91,13 @@ public class DuenoIGU extends JFrame {
                     } else if (dormido) {
                         ruta1 = rutaImagenes + "/dormido-" + tramoEdad.toString() + "-00.gif";
                         ruta2 = rutaImagenes + "/dormido-" + tramoEdad.toString() + "-01.gif";
-                    } else if (muerto) {
+                    }
+                    if (muerto) {
                         ruta1 = rutaImagenes + "/muerto.gif";
                         ruta2 = rutaImagenes + "/muerto.gif";
                     }
                 } else {
-                    if (mascota.estasSucio()) {
+                    if (sucio) {
                         ruta1 = rutaImagenes + "/quejarse-sucio-" + tramoEdad.toString() + "-00.gif";
                         ruta2 = rutaImagenes + "/quejarse-sucio-" + tramoEdad.toString() + "-01.gif";
                     } else {
