@@ -140,7 +140,7 @@ public class DuenoIGU extends JFrame {
 
     //Construir el marco
     public DuenoIGU() {
-        mascota = new RatoncitoFiuFiu("Nombre", 50, (byte) 5, (byte) 50, (byte) 100, (byte) 100);
+        mascota = new RatoncitoFiuFiu("Nombre", 50, (byte) 50, (byte) 50, (byte) 100, (byte) 100);
         temporizador = new Timer();
         temporizador.schedule(new Envejecimiento(mascota, labelGrafica), 0, 500);
         horaAnterior = System.currentTimeMillis();
@@ -223,7 +223,7 @@ public class DuenoIGU extends JFrame {
 
     void botonAlimentar_mouseClicked(MouseEvent e) {
         // Aqui alimentamos a la mascota
-        mascota.alimentar(3);
+        mascota.alimentar(15);
     }
 
     void botonCurar_mouseClicked(MouseEvent e) {
