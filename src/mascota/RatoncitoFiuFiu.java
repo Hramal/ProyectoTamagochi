@@ -26,6 +26,8 @@ public class RatoncitoFiuFiu {
 
     private int felicidad;
 
+    private boolean jugar;
+
 
     public RatoncitoFiuFiu(String nombre, int peso, byte hambre, byte guarro, byte salud, byte energia) {
         this.nombre = nombre;
@@ -224,19 +226,23 @@ public class RatoncitoFiuFiu {
         }
     }
 
-    public boolean jugar (float cantidadDiversion){
+    public boolean jugar(float cantidadDiversion){
 
         if (estasEnfermo() || estasSucio() || estasDormido() || tienesHambre()){
+            this.jugar = false;
             return false;
         }else{
             this.energia -=cantidadDiversion;
             this.hambre +=cantidadDiversion;
             this.felicidad +=cantidadDiversion;
             aumentarFelicidad(cantidadDiversion);
+            this.jugar = true;
             return true;
         }
     }
-
+    public boolean estaJugando(){
+        return (this.jugar == true);
+    }
 
 
 
