@@ -21,6 +21,8 @@ public class DuenoIGU extends JFrame {
     private JButton botonLimpiar = new JButton();
     private JButton botonCurar = new JButton();
     private JButton botonAlimentar = new JButton();
+    private JButton botonJugar = new JButton();
+
     private TitledBorder titledBorder1;
     private JSplitPane jSplitPane1 = new JSplitPane();
     private JLabel labelGrafica = new JLabel();
@@ -66,7 +68,7 @@ public class DuenoIGU extends JFrame {
                 ruta1 = "";
                 ruta2 = "";
 
-                if (!mascota.tienesQuejas()|| muerto) {
+                if (!mascota.tienesQuejas() || muerto) {
                     if (despiertoEnfermoSucio) {
                         ruta1 = rutaImagenes + "/despierto-enfermo-sucio-" + tramoEdad.toString() + "-00.gif";
                         ruta2 = rutaImagenes + "/despierto-enfermo-sucio-" + tramoEdad.toString() + "-01.gif";
@@ -192,7 +194,14 @@ public class DuenoIGU extends JFrame {
                 botonAlimentar_mouseClicked(e);
             }
         });
-        jSplitPane1.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        botonJugar.setText("Jugar");
+        botonJugar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                botonJugar_mouseClicked(e);
+            }
+        });
+
+                jSplitPane1.setOrientation(JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setBorder(null);
         jSplitPane1.setBottomComponent(labelGrafica);
         jSplitPane1.setContinuousLayout(true);
@@ -207,6 +216,7 @@ public class DuenoIGU extends JFrame {
         jToolBar1.add(botonCurar, null);
         jToolBar1.add(botonLimpiar, null);
         jToolBar1.add(botonEstadisticas, null);
+        jToolBar1.add(botonJugar, null);
         contentPane.add(jSplitPane1, BorderLayout.CENTER);
         jSplitPane1.add(labelGrafica, JSplitPane.RIGHT);
         jSplitPane1.add(labelSalida, JSplitPane.LEFT);
@@ -242,6 +252,12 @@ public class DuenoIGU extends JFrame {
         labelSalida.setText(mascota.estadisticas());
         horaAnterior = System.currentTimeMillis();
     }
+
+    void botonJugar_mouseClicked(MouseEvent e) {
+        //Aquí jugamos con la mascota
+        mascota.jugar(5);
+    }
+
 
     void hazmeCaso() {
         String rutaAudio = "../audio/argh.wav";

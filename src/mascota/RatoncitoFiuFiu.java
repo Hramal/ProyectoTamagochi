@@ -202,4 +202,13 @@ public class RatoncitoFiuFiu {
             peso = 35;
         }
     }
+
+    public boolean jugar (float cantidadDiversion){
+        return false;
+
+    }
+
+
+
+
 }
