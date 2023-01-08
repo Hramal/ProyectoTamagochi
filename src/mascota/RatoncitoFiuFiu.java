@@ -82,7 +82,7 @@ public class RatoncitoFiuFiu {
     }
 
     public boolean estasFeliz() {
-        return felicidad >=75;
+        return (felicidad >= 75 && !estasEnfermo() && !estasSucio());
     }
 
     public boolean estasEnfermo() {
@@ -103,12 +103,12 @@ public class RatoncitoFiuFiu {
         return this.hambre >= 70;
     }
 
-    private void aumentarFelicidad(float cantidad){
+    private void aumentarFelicidad(float cantidad) {
         this.felicidad += cantidad;
-        if(felicidad >= 100){
+        if (felicidad >= 100) {
             this.felicidad = 100;
         }
-        if(felicidad <=0){
+        if (felicidad <= 0) {
             this.felicidad = 0;
         }
     }
@@ -134,8 +134,9 @@ public class RatoncitoFiuFiu {
 
                 this.salud = 0;
             } else if (this.salud <= 25) {
-
                 this.salud -= 5;
+            }else if (queTramoEdad() == VEJEZ){
+                this.salud -= 7;
             } else {
                 this.salud -= 5;
             }
@@ -150,18 +151,30 @@ public class RatoncitoFiuFiu {
             } else if (energia > 65) {
                 estaRoncando = false;
             }
-            if (estaRoncando) {
+            if (estaRoncando && (queTramoEdad() == INFANCIA)) {
+                aumentarEnergia(1);
+            }
+            if (estaRoncando && (queTramoEdad() == ADULTO)) {
+                aumentarEnergia(3);
+            }
+            if (estaRoncando && (queTramoEdad() == VEJEZ)) {
                 aumentarEnergia(5);
             }
             vivido = 0;
-            if (estasEnfermo()){
+            if (estasEnfermo()) {
                 aumentarFelicidad(-1);
+                perderPeso(5);
+            } else {
+                perderPeso(5);
+            }
+            if (estasSucio()) {
+                aumentarSalud(-5);
             }
         }
     }
 
     public boolean tienesQuejas() {
-        return (!estasFeliz());
+        return (!estasFeliz() || !estasEnfermo());
     }
 
     public void alimentar(float cantidadAlimento) {
@@ -169,8 +182,19 @@ public class RatoncitoFiuFiu {
             aumentarSalud(cantidadAlimento);
             aumentarFelicidad(cantidadAlimento);
             comeDemasiado = false;
+            if (queTramoEdad() == VEJEZ) {
+                this.hambre += (cantidadAlimento - 10);
+
+            } else if (queTramoEdad() == ADULTO) {
+                this.hambre += (cantidadAlimento);
+
+            } else {
+                this.hambre += (cantidadAlimento - 5);
+
+            }
         } else {
             comeDemasiado = true;
+            aumentarSalud(-cantidadAlimento);
             aumentarFelicidad(-cantidadAlimento);
         }
         this.hambre -= cantidadAlimento;
@@ -183,9 +207,13 @@ public class RatoncitoFiuFiu {
     }
 
     public void curar(float cantidadMedicina) {
-        aumentarSalud(cantidadMedicina);
-        aumentarEnergia(cantidadMedicina);
-        aumentarFelicidad(cantidadMedicina);
+        if (estasEnfermo()) {
+            aumentarSalud(cantidadMedicina);
+            aumentarEnergia(cantidadMedicina);
+            aumentarFelicidad(cantidadMedicina);
+        } else {
+            this.salud = 25;
+        }
     }
 
     private void ganarPeso(float cantidad) {
@@ -220,30 +248,32 @@ public class RatoncitoFiuFiu {
         if (tienesHambre() || estasEnfermo()) {
             this.peso -= cantidad;
             aumentarFelicidad(-cantidad);
+        } else {
+            this.peso -= (cantidad / 2);
         }
         if (peso <= 35) {
             peso = 35;
         }
     }
 
-    public boolean jugar(float cantidadDiversion){
+    public boolean jugar(float cantidadDiversion) {
 
-        if (estasEnfermo() || estasSucio() || estasDormido() || tienesHambre()){
+        if (estasEnfermo() || estasSucio() || estasDormido() || tienesHambre()) {
             this.jugar = false;
             return false;
-        }else{
-            this.energia -=cantidadDiversion;
-            this.hambre +=cantidadDiversion;
-            this.felicidad +=cantidadDiversion;
+        } else {
+            this.energia -= cantidadDiversion;
+            this.hambre += cantidadDiversion;
+            this.felicidad += cantidadDiversion;
             aumentarFelicidad(cantidadDiversion);
             this.jugar = true;
             return true;
         }
     }
-    public boolean estaJugando(){
+
+    public boolean estaJugando() {
         return (this.jugar == true);
     }
-
 
 
 }
