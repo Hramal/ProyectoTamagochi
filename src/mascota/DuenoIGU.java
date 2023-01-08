@@ -255,7 +255,7 @@ public class DuenoIGU extends JFrame {
 
     void botonJugar_mouseClicked(MouseEvent e) {
         //Aquí jugamos con la mascota
-        mascota.jugar(5);
+        mascota.jugar(15);
     }
 
 
