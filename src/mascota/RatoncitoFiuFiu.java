@@ -116,7 +116,7 @@ public class RatoncitoFiuFiu {
     public void envejecer(int segundos) {
         this.edad += segundos;
         vivido += segundos;
-        if (vivido > 5) {
+        if (vivido > 20) {
             if (this.hambre >= 100) {
                 tienesHambre();
                 estasEnfermo();
@@ -174,7 +174,7 @@ public class RatoncitoFiuFiu {
     }
 
     public boolean tienesQuejas() {
-        return (!estasFeliz() || !estasEnfermo());
+        return (!estasFeliz());
     }
 
     public void alimentar(float cantidadAlimento) {
@@ -273,6 +273,11 @@ public class RatoncitoFiuFiu {
 
     public boolean estaJugando() {
         return (this.jugar == true);
+    }
+    public void elixirJuventud(){
+        if (queTramoEdad() == VEJEZ || queTramoEdad() == ADULTO){
+                edad = INFANCIA;
+        }
     }
 
 

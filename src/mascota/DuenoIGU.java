@@ -22,6 +22,7 @@ public class DuenoIGU extends JFrame {
     private JButton botonCurar = new JButton();
     private JButton botonAlimentar = new JButton();
     private JButton botonJugar = new JButton();
+    private JButton botonelixirJuventud = new JButton();
 
     private TitledBorder titledBorder1;
     private JSplitPane jSplitPane1 = new JSplitPane();
@@ -204,6 +205,12 @@ public class DuenoIGU extends JFrame {
                 botonJugar_mouseClicked(e);
             }
         });
+        botonelixirJuventud.setText("ElixirJuventud");
+        botonelixirJuventud.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                botonelixirJuventud_mouseClicked(e);
+            }
+        });
 
                 jSplitPane1.setOrientation(JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setBorder(null);
@@ -221,6 +228,7 @@ public class DuenoIGU extends JFrame {
         jToolBar1.add(botonLimpiar, null);
         jToolBar1.add(botonEstadisticas, null);
         jToolBar1.add(botonJugar, null);
+        jToolBar1.add(botonelixirJuventud, null);
         contentPane.add(jSplitPane1, BorderLayout.CENTER);
         jSplitPane1.add(labelGrafica, JSplitPane.RIGHT);
         jSplitPane1.add(labelSalida, JSplitPane.LEFT);
@@ -261,6 +269,10 @@ public class DuenoIGU extends JFrame {
         //Aquí jugamos con la mascota
         mascota.jugar(15);
     }
+    void botonelixirJuventud_mouseClicked(MouseEvent e) {
+        //Aquí jugamos con la mascota
+        mascota.elixirJuventud();
+    }
 
 
     void hazmeCaso() {
@@ -278,4 +290,6 @@ public class DuenoIGU extends JFrame {
 
         horaAnterior = System.currentTimeMillis();
     }
+
+
 }
